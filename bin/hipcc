@@ -102,8 +102,10 @@ sub delete_temp_dirs {
 $HIP_PLATFORM= `$HIP_PATH/bin/hipconfig --platform` // "hcc";
 $HIP_VERSION= `$HIP_PATH/bin/hipconfig --version`;
 ($HIP_VERSION_MAJOR, $HIP_VERSION_MINOR, $HIP_VERSION_PATCH) = split(/\./, $HIP_VERSION);
-$HIP_COMPILER= $hipConfig{'HIP_COMPILER'};
 $HIP_RUNTIME= $hipConfig{'HIP_RUNTIME'};
+if (!defined $HIP_COMPILER) {
+    $HIP_COMPILER= $hipConfig{'HIP_COMPILER'};
+}
 
 # If using VDI runtime, need to find HIP_VDI_HOME
 if ($HIP_RUNTIME eq "VDI" and !defined $HIP_VDI_HOME) {
