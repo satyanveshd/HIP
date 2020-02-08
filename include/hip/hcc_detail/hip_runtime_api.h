@@ -3370,20 +3370,6 @@ hipError_t hipBindTextureToMipmappedArray(const texture<T, dim, readMode>& tex,
     return hipSuccess;
 }
 
-template <class T>
-inline hipError_t hipOccupancyMaxActiveBlocksPerMultiprocessor(
-    int* numBlocks, T f, int blockSize, size_t dynSharedMemPerBlk) {
-    return hipOccupancyMaxActiveBlocksPerMultiprocessor(
-        numBlocks, reinterpret_cast<const void*>(f), blockSize, dynSharedMemPerBlk);
-}
-
-template <class T>
-inline hipError_t hipOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(
-    int* numBlocks, T f, int blockSize, size_t dynSharedMemPerBlk, unsigned int flags) {
-    return hipOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(
-        numBlocks, reinterpret_cast<const void*>(f), blockSize, dynSharedMemPerBlk, flags);
-}
-
 #if __HIP_VDI__ && !defined(__HCC__)
 template <class T>
 inline hipError_t hipLaunchCooperativeKernel(T f, dim3 gridDim, dim3 blockDim,
