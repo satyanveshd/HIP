@@ -90,8 +90,8 @@ bool Synccopy(int* S_d, int* A_h, int* B_h, int* C_h, int* D_h)
    HIPCHECK(hipMemcpy(R_d, S_d, Nbytes, hipMemcpyDeviceToDevice));
    HIPCHECK(hipMemcpy(B_h, R_d, Nbytes, hipMemcpyDeviceToHost));
    
-   HIPCHECK(hipMemcpy(R_d, A_h, Nbytes, hipMemcpyHostToDevice));
-   HIPCHECK(hipMemcpy(C_h, R_d, Nbytes, hipMemcpyDeviceToHost));
+   HIPCHECK(hipMemcpy(S_d, A_h, Nbytes, hipMemcpyHostToDevice));
+   HIPCHECK(hipMemcpy(C_h, S_d, Nbytes, hipMemcpyDeviceToHost));
 
    HIPCHECK(hipMemcpy(S_d, R_d, Nbytes, hipMemcpyDeviceToDevice));
    HIPCHECK(hipMemcpy(D_h, S_d, Nbytes, hipMemcpyDeviceToHost));
@@ -224,8 +224,8 @@ bool runipcTest()
         
             for (unsigned i = 0; i < N; i++) {
                assert(C_h[i] == A_h[i]);
-               assert(D_h[i] == A_h[i]+1);
-               assert(B_h[i] == A_h[i]+1);
+               assert(D_h[i] == A_h[i]+2);
+               assert(B_h[i] == A_h[i]+2);
             }   
         } 
 
